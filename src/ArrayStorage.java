@@ -7,15 +7,14 @@ public class ArrayStorage {
     int size;
 
     void clear() {
-        for (int i = size; i >= 0; i--) {
+        for (int i = 0; i >= size; i++) {
             storage[i] = null;
         }
         size = 0;
     }
 
     void save(Resume r) {
-        storage[size] = r;
-        size++;
+        storage[size++] = r;
     }
 
     Resume get(String uuid) {
@@ -33,6 +32,7 @@ public class ArrayStorage {
                 storage[i] = storage[size - 1];
                 storage[size - 1] = null;
                 size--;
+                break;
             }
         }
     }
