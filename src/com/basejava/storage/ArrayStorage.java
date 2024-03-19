@@ -84,7 +84,11 @@ public class ArrayStorage {
     }
 
     private boolean isExisting(int index) {
-        System.out.println(index != -1);
-        return index != -1;
+        if (index != -1){
+            System.out.println("Resume with uuid = \"" + storage[index].getUuid() + "\" exist");
+            return true;
+        }
+        System.out.println("Resume not found");
+        return false;
     }
 }
