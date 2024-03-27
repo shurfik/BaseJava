@@ -7,12 +7,11 @@ import com.basejava.model.Resume;
  */
 public class ArrayStorage extends AbstractArrayStorage {
 
-    protected void addElement(int index, Resume r) {
+    protected void insertElement(Resume r, int index) {
             storage[size] = r;
-
     }
 
-    public void removeElement(int index) {
+    protected void fillDeletedElement(int index) {
             storage[index] = storage[size - 1];
     }
 
