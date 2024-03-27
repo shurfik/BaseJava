@@ -9,13 +9,11 @@ public class ArrayStorage extends AbstractArrayStorage {
 
     protected void addElement(int index, Resume r) {
             storage[size] = r;
-            size++;
+
     }
 
     public void removeElement(int index) {
             storage[index] = storage[size - 1];
-            storage[size - 1] = null;
-            size--;
     }
 
     @Override
