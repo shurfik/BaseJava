@@ -1,6 +1,8 @@
 package com.basejava;
 
 import com.basejava.model.Resume;
+import com.basejava.storage.ListStorage;
+import com.basejava.storage.Storage;
 
 import java.util.*;
 
@@ -41,7 +43,6 @@ public class MainCollection {
         }
         System.out.println(collection.toString());
 
-
         Map<String, Resume> map = new HashMap<>();
         map.put(UUID_1, RESUME_1);
         map.put(UUID_2, RESUME_2);
@@ -55,5 +56,21 @@ public class MainCollection {
         for (Map.Entry<String, Resume> entry : map.entrySet()) {
             System.out.println(entry.getValue());
         }
+        System.out.println("TEST LIST STORAGE");
+
+        Storage<List<Resume>> storage = new ListStorage();
+        storage.save(RESUME_1);
+        storage.save(RESUME_2);
+        storage.save(RESUME_3);
+        Object all = storage.getAll();
+        System.out.println(all);
+        System.out.println("Размер ListStorage после добавления трех элементов = " + storage.size());
+
+        storage.delete(UUID_2);
+        System.out.println(storage.getAll());
+
+        System.out.println("Размер ListStorage после удаления элемента с UUID2 = " + storage.size());
+
+
     }
 }
