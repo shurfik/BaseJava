@@ -16,7 +16,6 @@ public class ListStorageTest extends AbstractStorageTest<List<Resume>> {
     @Test
     public void getAll() {
         List<Resume> list = storage.getAll();
-        System.out.println(list);
         assertEquals(3, list.size());
         assertEquals(RESUME_1, list.get(0));
         assertEquals(RESUME_2, list.get(1));

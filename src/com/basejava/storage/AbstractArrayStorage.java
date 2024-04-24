@@ -65,7 +65,7 @@ public abstract class AbstractArrayStorage extends AbstractStorage<Resume[], Int
 
     @Override
     protected boolean isExist(Integer key) {
-        return key != -1;
+        return key >= 0;
     }
 
     protected abstract void fillDeletedElement(int index);
