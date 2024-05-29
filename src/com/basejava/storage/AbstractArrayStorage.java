@@ -8,7 +8,7 @@ import java.util.Arrays;
 /**
  * Array based storage for Resumes
  */
-public abstract class AbstractArrayStorage extends AbstractStorage<Resume[], Integer> {
+public abstract class AbstractArrayStorage extends AbstractStorage {
 
     protected static final int STORAGE_LIMIT = 10000;
 
@@ -30,17 +30,16 @@ public abstract class AbstractArrayStorage extends AbstractStorage<Resume[], Int
     }
 
     @Override
-    protected void updateResume(Integer index, Resume r) {
-        storage[index] = r;
+    protected void updateResume(Object index, Resume r) {
+        storage[(int) index] = r;
     }
 
     @Override
-    protected void saveResume(Integer index, Resume r) {
+    protected void saveResume(Object index, Resume r) {
         if (size == STORAGE_LIMIT) {
             throw new StorageException("Storage overflow", r.getUuid());
         } else {
-            if (index == null) index = -1;
-            insertElement(r, index);
+            insertElement(r, (Integer) index);
             size++;
         }
     }
@@ -52,25 +51,25 @@ public abstract class AbstractArrayStorage extends AbstractStorage<Resume[], Int
         return Arrays.copyOfRange(storage, 0, size);
     }
 
-    public void deleteResume(Integer index, String uuid) {
-        fillDeletedElement(index);
+    public void deleteResume(Object index, String uuid) {
+        fillDeletedElement((Integer) index);
         storage[size - 1] = null;
         size--;
     }
 
     @Override
-    protected Resume getResume(Integer index) {
-        return storage[index];
+    protected Resume getResume(Object index) {
+        return storage[(int) index];
     }
 
     @Override
-    protected boolean isExist(Integer key) {
-        return key >= 0;
+    protected boolean isExist(Object key) {
+        return (Integer) key >= 0;
     }
 
     protected abstract void fillDeletedElement(int index);
 
     protected abstract void insertElement(Resume r, int index);
 
-    protected abstract Integer searchKey(String uuid);
+    protected abstract Object getSearchKey(String uuid);
 }

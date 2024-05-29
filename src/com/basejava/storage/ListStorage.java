@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class ListStorage extends AbstractStorage<List<Resume>, Integer> {
+public class ListStorage extends AbstractStorage {
 
     private final List<Resume> storage;
 
@@ -20,27 +20,27 @@ public class ListStorage extends AbstractStorage<List<Resume>, Integer> {
     }
 
     @Override
-    protected void updateResume(Integer index, Resume r) {
-        storage.add(index, r);
+    protected void updateResume(Object index, Resume r) {
+        storage.add((Integer) index, r);
     }
 
     @Override
-    protected void deleteResume(Integer index, String uuid) {
-        storage.remove(index.intValue());
+    protected void deleteResume(Object index, String uuid) {
+        storage.remove((int) index);
     }
 
     @Override
-    protected void saveResume(Integer index, Resume r) {
+    protected void saveResume(Object index, Resume r) {
         storage.add(r);
     }
 
     @Override
-    public Resume getResume(Integer index) {
-        return storage.get(index);
+    public Resume getResume(Object index) {
+        return storage.get((Integer) index);
     }
 
-    public List<Resume> getAll() {
-        return storage;
+    public Resume[] getAll() {
+        return storage.toArray(new Resume[0]);
     }
 
     @Override
@@ -49,10 +49,10 @@ public class ListStorage extends AbstractStorage<List<Resume>, Integer> {
     }
 
     @Override
-    protected Integer searchKey(String uuid) {
-        Integer key = null;
+    protected Integer getSearchKey(String uuid) {
+        int key = -1;
         for (int i = 0; i < storage.size(); i++) {
-            if (Objects.equals(storage.get(i).getUuid(), uuid)){
+            if (Objects.equals(storage.get(i).getUuid(), uuid)) {
                 key = i;
                 break;
             }
@@ -61,7 +61,7 @@ public class ListStorage extends AbstractStorage<List<Resume>, Integer> {
     }
 
     @Override
-    protected boolean isExist(Integer key) {
-        return key != null;
+    protected boolean isExist(Object key) {
+        return (Integer) key >= 0;
     }
 }

@@ -2,7 +2,7 @@ package com.basejava.storage;
 
 import com.basejava.model.Resume;
 
-public interface Storage<T> {
+public interface Storage {
 
     void clear();
 
@@ -14,7 +14,7 @@ public interface Storage<T> {
 
     void delete(String uuid);
 
-    T getAll();
+    Resume[] getAll();
 
     int size();
 }

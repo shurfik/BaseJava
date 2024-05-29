@@ -41,7 +41,7 @@ public class MainCollection {
                 iterator.remove();
             }
         }
-        System.out.println(collection.toString());
+        System.out.println(collection);
 
         Map<String, Resume> map = new HashMap<>();
         map.put(UUID_1, RESUME_1);
@@ -58,7 +58,7 @@ public class MainCollection {
         }
         System.out.println("TEST LIST STORAGE");
 
-        Storage<List<Resume>> storage = new ListStorage();
+        Storage storage = new ListStorage();
         storage.save(RESUME_1);
         storage.save(RESUME_2);
         storage.save(RESUME_3);
@@ -67,7 +67,7 @@ public class MainCollection {
         System.out.println("Размер ListStorage после добавления трех элементов = " + storage.size());
 
         storage.delete(UUID_2);
-        System.out.println(storage.getAll());
+        System.out.println(Arrays.toString(storage.getAll()));
 
         System.out.println("Размер ListStorage после удаления элемента с UUID2 = " + storage.size());
 

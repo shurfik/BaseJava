@@ -9,11 +9,11 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertSame;
 
-public abstract class AbstractStorageTest<T> {
+public abstract class AbstractStorageTest {
 
-    protected Storage<T> storage;
+    protected Storage storage;
 
-    protected AbstractStorageTest(Storage<T> storage) {
+    protected AbstractStorageTest(Storage storage) {
         this.storage = storage;
     }
 

@@ -2,10 +2,11 @@ package com.basejava.storage;
 
 import com.basejava.model.Resume;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MapStorage extends AbstractStorage<Map<String, Resume>, String> {
+public class MapStorage extends AbstractStorage {
 
     private final Map<String, Resume> storage;
 
@@ -14,36 +15,33 @@ public class MapStorage extends AbstractStorage<Map<String, Resume>, String> {
     }
 
     @Override
-    protected String searchKey(String uuid) {
-        if (storage.get(uuid) != null){
-            return uuid;
-        }
-        return null;
+    protected String getSearchKey(String uuid) {
+        return uuid;
     }
 
     @Override
-    protected boolean isExist(String key) {
-        return key != null;
+    protected boolean isExist(Object key) {
+        return storage.containsKey((String) key);
     }
 
     @Override
-    protected void saveResume(String key, Resume r) {
-        storage.put(r.getUuid(), r);
+    protected void saveResume(Object key, Resume r) {
+        storage.put((String) key, r);
     }
 
     @Override
-    protected void updateResume(String key, Resume r) {
-        storage.computeIfPresent(key, (k, v) -> r);
+    protected void updateResume(Object key, Resume r) {
+        storage.computeIfPresent((String) key, (k, v) -> r);
     }
 
     @Override
-    protected void deleteResume(String key, String uuid) {
-        storage.remove(key);
+    protected void deleteResume(Object key, String uuid) {
+        storage.remove((String) key);
     }
 
     @Override
-    protected Resume getResume(String key) {
-        return storage.get(key);
+    protected Resume getResume(Object key) {
+        return storage.get((String) key);
     }
 
     @Override
@@ -52,8 +50,9 @@ public class MapStorage extends AbstractStorage<Map<String, Resume>, String> {
     }
 
     @Override
-    public Map<String, Resume> getAll() {
-        return storage;
+    public Resume[] getAll() {
+        Collection<Resume> values = storage.values();
+        return values.toArray(new Resume[0]);
     }
 
     @Override

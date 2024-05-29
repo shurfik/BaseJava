@@ -5,10 +5,12 @@ import com.basejava.model.Resume;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static com.basejava.storage.AbstractArrayStorage.STORAGE_LIMIT;
 import static org.junit.Assert.assertEquals;
 
-public abstract class AbstractArrayStorageTest extends AbstractStorageTest<Resume[]> {
+public abstract class AbstractArrayStorageTest extends AbstractStorageTest {
 
     public AbstractArrayStorageTest(AbstractArrayStorage storage) {
         super(storage);
@@ -17,6 +19,7 @@ public abstract class AbstractArrayStorageTest extends AbstractStorageTest<Resum
     @Test
     public void getAll() {
         Resume[] array = storage.getAll();
+        System.out.println(Arrays.toString(array));
         assertEquals(3, array.length);
         assertEquals(RESUME_1, array[0]);
         assertEquals(RESUME_2, array[1]);
